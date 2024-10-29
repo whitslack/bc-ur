@@ -2,14 +2,17 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([bc-ur], [0.2.0])
+AC_INIT([bc-ur], [0.3.0], [], [bc-ur], [https://github.com/BlockchainCommons/bc-ur])
 AC_CONFIG_SRCDIR([src/ur.cpp])
 AC_CONFIG_HEADERS([config.h])
+AM_INIT_AUTOMAKE([foreign subdir-objects])
+LT_INIT
 
 # Checks for programs.
 AC_PROG_CXX
 AC_PROG_CC
 AC_PROG_INSTALL
+PKG_INSTALLDIR
 
 # Checks for libraries.
 
@@ -29,7 +32,15 @@ AC_TYPE_UINT8_T
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([bzero])
 
+case "$(uname)" in
+	*MINGW64*)
+		WS2_32_LIB=-lws2_32
+		;;
+esac
+AC_SUBST([WS2_32_LIB])
+
 AC_CONFIG_FILES([Makefile
+                 libbc-ur.pc
                  src/Makefile
                  test/Makefile])
 AC_OUTPUT

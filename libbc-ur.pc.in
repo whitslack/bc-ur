@@ -1,0 +1,11 @@
+prefix=@prefix@
+exec_prefix=@exec_prefix@
+includedir=@includedir@/@PACKAGE_NAME@
+libdir=@libdir@
+
+Name: lib@PACKAGE_NAME@
+Description: Uniform Resources reference library in C++
+URL: @PACKAGE_URL@
+Version: @PACKAGE_VERSION@
+Cflags: -I${includedir}
+Libs: -L${libdir} -l@PACKAGE_NAME@
